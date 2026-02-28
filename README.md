@@ -429,21 +429,32 @@ PASSO 3 — COBERTURA: Para cada problema, crie critérios específicos.
 
 ### Dataset de avaliação
 
-O dataset `prompt-optimization-challenge-resolved-eval` foi criado automaticamente pelo `evaluate.py` a partir do arquivo `datasets/bug_to_user_story.jsonl` (15 exemplos). O LangSmith acumula as execuções de cada iteração — ao total, o projeto registra 50+ execuções rastreadas (5 iterações × 10 exemplos cada).
+O dataset `prompt-optimization-challenge-resolved-eval` foi criado automaticamente pelo `evaluate.py` a partir do arquivo `datasets/bug_to_user_story.jsonl` e expandido para **20 exemplos** no LangSmith. O LangSmith acumula as execuções de cada iteração — ao total, o projeto registra 50+ execuções rastreadas (5 iterações × 10 exemplos cada).
 
 ![alt text](image-4.png)
 
 ### Execuções do prompt v1 (ruins) com notas baixas
 
-O prompt v1 (`leonanluppi/bug_to_user_story_v1`) foi analisado na Fase 1 do projeto. Suas deficiências estruturais resultam em performance muito baixa:
+O prompt v1 (`leonanluppi/bug_to_user_story_v1`) foi avaliado com o mesmo script `evaluate.py` e dataset. Resultado: **REPROVADO** com média 0.8137 — todas as métricas abaixo de 0.9:
 
-| Problema identificado no v1 | Impacto nas métricas |
+| Métrica | v1 (resultado) | Mínimo exigido |
+|---|---|---|
+| Helpfulness | 0.86 ✗ | 0.90 |
+| Correctness | 0.78 ✗ | 0.90 |
+| F1-Score | 0.70 ✗ | 0.90 |
+| Clarity | 0.88 ✗ | 0.90 |
+| Precision | 0.85 ✗ | 0.90 |
+| **Média** | **0.8137 ❌** | 0.90 |
+
+Causa raiz das notas baixas:
+
+| Problema no v1 | Impacto |
 |---|---|
-| Zero-shot (sem exemplos) | F1 baixo — modelo não aprende o formato |
-| Sem persona definida | Clarity baixa — tom genérico |
-| Sem estrutura de saída exigida | Precision baixa — formato inconsistente |
-| Instrução genérica e vaga | Helpfulness baixa — output sem critérios Gherkin |
-| `user_prompt` duplica o bug report | Correctness baixa — sem raciocínio orientado |
+| Zero-shot (sem exemplos) | F1=0.70 — modelo não aprende o formato de saída |
+| Sem persona definida | Clarity=0.88 — tom genérico, sem rigor técnico |
+| Sem estrutura de saída exigida | Precision=0.85 — formato inconsistente entre exemplos |
+| Instrução genérica e vaga | Helpfulness=0.86 — output sem critérios Gherkin |
+| `user_prompt` duplica o bug report | Correctness=0.78 — sem raciocínio orientado ao problema |
 
 ### Execuções do prompt v2 (otimizados) com notas ≥ 0.9
 
