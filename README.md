@@ -421,7 +421,78 @@ PASSO 3 — COBERTURA: Para cada problema, crie critérios específicos.
 ### Links
 
 - **Prompt Hub (público):** https://smith.langchain.com/hub/gquadross/bug_to_user_story_v2
-- **Dashboard LangSmith:** https://smith.langchain.com/projects/prompt-optimization-challenge-resolved
+- **Dashboard LangSmith:** https://smith.langchain.com/o/7b6c27d9-3c51-4eaa-9f9f-a73f7ac07f43/dashboards/projects/6bd2bc5a-05cd-45ed-8dd9-8aa7346b397a
+
+---
+
+## Evidências no LangSmith
+
+### Dataset de avaliação
+
+O dataset `prompt-optimization-challenge-resolved-eval` foi criado automaticamente pelo `evaluate.py` a partir do arquivo `datasets/bug_to_user_story.jsonl` (15 exemplos). O LangSmith acumula as execuções de cada iteração — ao total, o projeto registra 50+ execuções rastreadas (5 iterações × 10 exemplos cada).
+
+![alt text](image-4.png)
+
+### Execuções do prompt v1 (ruins) com notas baixas
+
+O prompt v1 (`leonanluppi/bug_to_user_story_v1`) foi analisado na Fase 1 do projeto. Suas deficiências estruturais resultam em performance muito baixa:
+
+| Problema identificado no v1 | Impacto nas métricas |
+|---|---|
+| Zero-shot (sem exemplos) | F1 baixo — modelo não aprende o formato |
+| Sem persona definida | Clarity baixa — tom genérico |
+| Sem estrutura de saída exigida | Precision baixa — formato inconsistente |
+| Instrução genérica e vaga | Helpfulness baixa — output sem critérios Gherkin |
+| `user_prompt` duplica o bug report | Correctness baixa — sem raciocínio orientado |
+
+### Execuções do prompt v2 (otimizados) com notas ≥ 0.9
+
+![alt text](image-16.png)
+
+1.
+
+![alt text](image-17.png)
+
+2.
+
+![alt text](image-18.png)
+
+3.
+
+![alt text](image-19.png)
+
+| Métrica | Resultado |
+|---|---|
+| Helpfulness | 0.94 |
+| Correctness | 0.95 |
+| F1-Score | 0.95 |
+| Clarity | 0.94 |
+| Precision | 0.95 |
+| **Média** | **0.9473 ✅** |
+
+### Tracing detalhado de pelo menos 3 exemplos
+
+Para cada exemplo avaliado é possível visualizar o input enviado, o output gerado, a pontuação de cada métrica com justificativa do avaliador gpt-4o e a latência por chamada.
+
+![alt text](image-12.png)
+
+1.
+
+![alt text](image-20.png)
+
+2.
+
+![alt text](image-21.png)
+
+3.
+
+![alt text](image-22.png)
+
+**https://smith.langchain.com/public/8860761c-91c8-4ecf-a8d6-cca5c28a1cff/r**
+
+**https://smith.langchain.com/public/fb0c6036-a140-4510-9249-8bdf48e570a1/r**
+
+**https://smith.langchain.com/public/9a5a08c8-7712-415b-8aab-3536b3f544b0/r**
 
 ---
 
