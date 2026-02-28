@@ -421,7 +421,7 @@ PASSO 3 — COBERTURA: Para cada problema, crie critérios específicos.
 ### Links
 
 - **Prompt Hub (público):** https://smith.langchain.com/hub/gquadross/bug_to_user_story_v2
-- **Dashboard LangSmith:** https://smith.langchain.com/o/7b6c27d9-3c51-4eaa-9f9f-a73f7ac07f43/dashboards/projects/6bd2bc5a-05cd-45ed-8dd9-8aa7346b397a
+- **Dashboard LangSmith:** 
 
 ---
 
